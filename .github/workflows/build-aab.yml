@@ -9,34 +9,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Set up Java
-      uses: actions/setup-java@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
       with:
-        java-version: '17'
+        node-version: 18
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y gradle
-        npm install -g cordova
-
-    - name: Accept Android licenses
-      run: |
-        yes | sudo sdkmanager --licenses || true
-
-    - name: Set up Android SDK
-      uses: android-actions/setup-android@v2
+    - name: Install Cordova
+      run: npm install -g cordova
 
     - name: Create Cordova project
       run: |
         cordova create app com.example.webgame WebGame
         cd app
-        cordova platform add android
+        cordova platform add android@12
         rm -rf www/*
         cp -r ../www/* www/
+
+    - name: Set up Android SDK
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 30
+        target: default
+        arch: x86_64
+        script: echo "Android SDK ready"
 
     - name: Build AAB
       run: |
