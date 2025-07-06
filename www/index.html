@@ -1,1 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shakesnake</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Main Menu -->
+    <div id="main-menu" class="game-container">
+        <div class="text-center p-6 bg-gray-800 rounded-xl shadow-2xl max-w-sm w-full mt-[-14%]">
+            <h1 class="text-4xl font-bold mb-4 text-green-400">Snake Game</h1>
+            <p class="mb-6 text-gray-300 text-sm">Eat food, grow longer, survive as long as possible!</p>
+            
+            <button id="start-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg mb-3 text-lg transition">
+                <i class="fas fa-play mr-2"></i> Start Game
+            </button>
+            
+            <div id="stats" class="mt-4 p-3 bg-gray-700 rounded-lg">
+                <h3 class="text-lg font-semibold mb-2 text-green-300">Statistics</h3>
+                <div class="text-sm space-y-1">
+                    <p><i class="fas fa-trophy mr-2"></i>High Score: <span id="high-score">0</span></p>
+                    <p><i class="fas fa-clock mr-2"></i>Longest Time: <span id="longest-time">0</span>s</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<div id="game-screen" class="hidden relative game-container flex flex-col items-center h-screen overflow-hidden">
 
+  <!-- Header: Time + Score -->
+  <div class="absolute top-10 left-1/2 -translate-x-1/2 flex justify-between items-center w-full max-w-md px-4">
+    <button id="back-btn" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded-lg text-sm">
+      <i class="fas fa-arrow-left mr-1"></i> Menu
+    </button>
+    <div class="bg-gray-800 rounded-lg px-4 py-2 text-sm">
+      <span class="font-bold">Score: </span>
+      <span id="current-score">0</span>
+      <span class="mx-2">|</span>
+      <span class="font-bold">Time: </span>
+      <span id="timer">0</span>s
+    </div>
+  </div>
+
+  <!-- Bàn cờ với margin trên dưới để căn giữa -->
+  <div class="relative overflow-visible mb-20">
+      <div id="game-board" class="relative mx-auto"></div>
+  </div>
+    <!-- Legend -->
+    <div class="bg-gray-800 rounded-lg px-4 py-2 text-xs text-center max-w-md ">
+      <div class="flex justify-center items-center space-x-6">
+        <div class="flex items-center">
+          <div class="w-3 h-3 bg-green-500 rounded-sm mr-1"></div>
+          <span>shakesnake</span>
+        </div>
+        <div class="flex items-center">
+          <div class="w-3 h-3 bg-red-500 rounded-sm mr-1"></div>
+          <span>food!</span>
+        </div>
+        <div class="flex items-center">
+          <div class="w-3 h-3 bg-gray-700 rounded-sm mr-1"></div>
+          <span>stone?</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div id="controls" class="hidden">
+    <!-- Left Controls -->
+    <div class="absolute left-4 top-[84%]  transform -translate-y-1 flex flex-row space-x-4 z-10">
+        <button id="left-btn" class="control-btn bg-green-700 hover:bg-green-800 text-white font-bold py-4 px-6 rounded-lg transition">
+            <i class="fas fa-chevron-left text-xl"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4.5 4.5 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-left-icon lucide-arrow-big-left"><path d="M18 15h-6v4l-7-7 7-7v4h6v6z"/></svg>
+        </button>
+        <button id="right-btn" class="control-btn bg-green-700 hover:bg-green-800 text-white font-bold py-4 px-6 rounded-lg transition">
+            <i class="fas fa-chevron-right text-xl"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4.5 4.5 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-right-icon lucide-arrow-big-right"><path d="M6 9h6V5l7 7-7 7v-4H6V9z"/></svg>
+        </button>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="absolute right-5 top-[87%]  transform -translate-y-1/2 flex flex-col space-y-6 z-10">
+         <button id="up-btn" class="control-btn bg-green-700 hover:bg-green-800 text-white font-bold py-4 px-6 rounded-lg transition">
+            <i class="fas fa-chevron-up text-xl"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4.5 4.5 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-up-icon lucide-arrow-big-up"><path d="M9 18v-6H5l7-7 7 7h-4v6H9z"/></svg>
+        </button>
+        <button id="down-btn" class="control-btn bg-green-700 hover:bg-green-800 text-white font-bold py-4 px-6 rounded-lg transition">
+            <i class="fas fa-chevron-down text-xl"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4.5 5 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-down-icon lucide-arrow-big-down"><path d="M15 6v6h4l-7 7-7-7h4V6h6z"/></svg>
+        </button>
+    </div>
+    </div>
+</div>
+    
+    <!-- Game Over Modal -->
+    <div id="gameover-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+        <div class="bg-gray-800 rounded-xl p-6 max-w-sm w-full shadow-2xl text-center">
+            <i class="fas fa-skull text-4xl text-red-400 mb-3"></i>
+            <h2 class="text-2xl font-bold mb-2 text-red-400">Game Over!</h2>
+            <p class="text-lg mb-3">Your snake crashed!</p>
+            <div class="bg-gray-700 rounded-lg p-3 mb-4 text-sm">
+                <p class="mb-1">Final Score: <span id="final-score" class="font-bold text-green-400">0</span></p>
+                <p>Survival Time: <span id="final-time" class="font-bold text-yellow-400">0</span>s</p>
+            </div>
+            <div id="new-record" class="hidden bg-yellow-600 rounded-lg p-2 mb-3 text-sm">
+                <i class="fas fa-star mr-1"></i>New Record!
+            </div>
+            <div class="space-y-2">
+                <button id="play-again-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+                    Play Again
+                </button>
+                <button id="back-to-menu-btn" class="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">
+                    Back to Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="info-modal" class="modal hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+        <div class="bg-gray-800 rounded-xl p-6 max-w-sm w-full shadow-2xl text-center">
+            <i class="fas fa-info-circle text-3xl text-blue-400 mb-3"></i>
+            <h2 class="text-xl font-bold mb-2">Information</h2>
+            <p id="info-text" class="mb-4"></p>
+            <button id="close-info-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <div id="snake-message" class="boss-message">
+      <p class="boss-text" id="snake-message-text"></p>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

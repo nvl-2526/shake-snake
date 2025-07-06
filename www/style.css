@@ -1,0 +1,152 @@
+        body {
+          user-select: none;
+          -webkit-user-select: none;
+          -webkit-touch-callout: none;
+        }
+        
+        .game-cell {
+          transition: all 0.1s ease;
+        }
+        
+        .snake-head, .snake-body {
+          background-color: #08ab75;
+          border-radius: 30%;
+        }
+
+        .food {
+          background-color: #ef4444;
+          border-radius: 50%;
+          animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+          100% { transform: scale(1); }
+        }
+        
+        .control-btn {
+          touch-action: manipulation;
+          user-select: none;
+          -webkit-user-select: none;
+          -webkit-touch-callout: none;
+          transition: transform 0.1s ease;
+        }
+        
+        .control-btn:active, .control-btn.pressed {
+          transform: scale(0.95);
+        }
+        
+        .game-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          padding: 10px;
+        }
+        
+        #game-board {
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #1f2937;
+          border: 2px solid #374151;
+          transition: transform 0.8s ease-in-out;
+          transform-style: preserve-3d;
+          will-change: transform;
+          perspective: 1000px;
+        }
+        
+
+
+        
+.distort-1 {transform: perspective(400px) rotateX(28deg) rotateY(12deg) rotateZ(8deg) scale(1.1);}
+.distort-2 {transform: perspective(450px) rotateX(-25deg) rotateY(-16deg) rotateZ(-10deg) scale(1.08);}
+.distort-3 {transform: perspective(420px) rotateX(15deg) rotateY(30deg) rotateZ(-15deg) scale(1.12);}
+.distort-4 {transform: perspective(430px) rotateX(-32deg) rotateY(20deg) rotateZ(12deg) scale(1.09);}
+.distort-5 {transform: perspective(400px) rotateX(22deg) rotateY(-28deg) rotateZ(14deg) scale(1.13);}
+.distort-6 {transform: perspective(410px) rotateX(-26deg) rotateY(26deg) rotateZ(-18deg) scale(1.1);}
+.distort-7 {transform: perspective(480px) rotateX(30deg) rotateY(-30deg) rotateZ(20deg) scale(1.14);}
+.distort-8 {transform: perspective(440px) rotateX(-18deg) rotateY(-32deg) rotateZ(10deg) scale(1.09);}
+.distort-9 {transform: perspective(410px) rotateX(36deg) rotateY(14deg) rotateZ(-22deg) scale(1.15);}
+.distort-10 {transform: perspective(420px) rotateX(20deg) rotateY(34deg) rotateZ(14deg) scale(1.12);}
+.distort-11 {transform: perspective(460px) rotateX(-22deg) rotateY(-30deg) rotateZ(-16deg) scale(1.11);}
+.distort-12 {transform: perspective(440px) rotateX(26deg) rotateY(-32deg) rotateZ(12deg) scale(1.13);}
+.distort-13 {transform: perspective(430px) rotateX(-28deg) rotateY(24deg) rotateZ(-14deg) scale(1.1);}
+.distort-14 {transform: perspective(450px) rotateX(32deg) rotateY(0deg) rotateZ(18deg) scale(1.12);}
+.distort-15 {transform: perspective(400px) rotateX(0deg) rotateY(-36deg) rotateZ(-12deg) scale(1.14);}
+.distort-16 {transform: perspective(420px) rotateX(38deg) rotateY(-8deg) rotateZ(22deg) scale(1.15);}
+.distort-17 {transform: perspective(460px) rotateX(-36deg) rotateY(18deg) rotateZ(-24deg) scale(1.14);}
+.distort-18 {transform: perspective(450px) rotateX(28deg) rotateY(32deg) rotateZ(-20deg) scale(1.16);}
+.distort-19 {transform: perspective(440px) rotateX(-30deg) rotateY(-36deg) rotateZ(25deg) scale(1.13);}
+.distort-20 {transform: perspective(470px) rotateX(40deg) rotateY(0deg) rotateZ(-30deg) scale(1.17);}
+
+.distort-21 {transform: perspective(430px) rotateX(0deg) rotateY(42deg) rotateZ(18deg) scale(1.16);}
+.distort-22 {transform: perspective(520px) rotateX(35deg) rotateY(22deg) rotateZ(-10deg) scale(1.13);}
+.distort-23 { transform: perspective(580px) rotateX(-42deg) rotateY(-28deg) rotateZ(12deg) scale(1.14);}
+.distort-24 {transform: perspective(560px) rotateX(50deg) rotateY(12deg) rotateZ(24deg) scale(1.16);}
+.distort-25 {transform: perspective(600px) rotateX(-38deg) rotateY(38deg) rotateZ(-18deg) scale(1.15);}
+.distort-26 {transform: perspective(570px) rotateX(46deg) rotateY(-30deg) rotateZ(10deg) scale(1.17);}
+.distort-27 {transform: perspective(610px) rotateX(40deg) rotateY(50deg) rotateZ(-22deg) scale(1.15);}
+.distort-28 {transform: perspective(640px) rotateX(-55deg) rotateY(-18deg) rotateZ(14deg) scale(1.16);}
+.distort-29 {transform: perspective(550px) rotateX(48deg) rotateY(36deg) rotateZ(-20deg) scale(1.18);}
+.distort-30 {transform: perspective(590px) rotateX(-44deg) rotateY(42deg) rotateZ(16deg) scale(1.17);}
+.distort-31 {transform: perspective(600px) rotateX(36deg) rotateY(-46deg) rotateZ(-12deg) scale(1.14);}
+.distort-32 {transform: perspective(610px) rotateX(52deg) rotateY(28deg) rotateZ(20deg) scale(1.16);}
+.distort-33 {transform: perspective(580px) rotateX(-40deg) rotateY(35deg) rotateZ(-16deg) scale(1.13);}
+.distort-34 {transform: perspective(620px) rotateX(38deg) rotateY(-40deg) rotateZ(18deg) scale(1.15);}
+.distort-35 {transform: perspective(610px) rotateX(-50deg) rotateY(30deg) rotateZ(10deg) scale(1.17);}
+.distort-36 {transform: perspective(630px) rotateX(44deg) rotateY(44deg) rotateZ(-14deg) scale(1.14);}
+.distort-37 {transform: perspective(650px) rotateX(-46deg) rotateY(-32deg) rotateZ(22deg) scale(1.18);}
+.distort-38 {transform: perspective(560px) rotateX(42deg) rotateY(-38deg) rotateZ(-18deg) scale(1.15);}
+.distort-39 {transform: perspective(580px) rotateX(-48deg) rotateY(24deg) rotateZ(12deg) scale(1.16);}
+.distort-40 {transform: perspective(590px) rotateX(46deg) rotateY(-36deg) rotateZ(-16deg) scale(1.17);}
+
+
+.distort-41 { transform: perspective(700px) rotateX(180deg) rotateY(0deg) rotateZ(0deg) scale(1.2); }
+.distort-42 { transform: perspective(900px) rotateX(0deg) rotateY(180deg) rotateZ(0deg) scale(1.2); }
+.distort-43 { transform: perspective(800px) rotateX(180deg) rotateY(180deg) rotateZ(0deg) scale(1.2); }
+.distort-44 { transform: perspective(700px) rotateX(270deg) rotateY(0deg) rotateZ(90deg) scale(1.1); }
+.distort-45 { transform: perspective(1000px) rotateX(360deg) rotateY(0deg) rotateZ(180deg) scale(1.3); }
+.distort-46 { transform: perspective(600px) rotateX(90deg) rotateY(90deg) rotateZ(90deg) scale(1.15); }
+.distort-47 { transform: perspective(750px) rotateX(-180deg) rotateY(180deg) rotateZ(90deg) scale(1.05); }
+.distort-48 { transform: perspective(900px) rotateX(0deg) rotateY(270deg) rotateZ(270deg) scale(1.25); }
+.distort-49 { transform: perspective(720px) rotateX(0deg) rotateY(0deg) rotateZ(270deg) scale(1.35); }
+.distort-50 { transform: perspective(850px) rotateX(360deg) rotateY(360deg) rotateZ(360deg) scale(1.4); }
+.distort-51 { transform: perspective(600px) rotateX(-90deg) rotateY(180deg) rotateZ(-90deg) scale(0.95); }
+.distort-52 { transform: perspective(780px) rotateX(120deg) rotateY(240deg) rotateZ(180deg) scale(1.3); }
+.distort-53 { transform: perspective(690px) rotateX(-270deg) rotateY(-90deg) rotateZ(90deg) scale(1.2); }
+.distort-54 { transform: perspective(1000px) rotateX(0deg) rotateY(360deg) rotateZ(180deg) scale(1.5); }
+.distort-55 { transform: perspective(950px) rotateX(1440deg) rotateY(0deg) rotateZ(0deg) scale(1.05); }
+.distort-56 { transform: perspective(620px) rotateX(0deg) rotateY(0deg) rotateZ(720deg) scale(1.4); }
+.distort-57 { transform: perspective(720px) rotateX(270deg) rotateY(180deg) rotateZ(270deg) scale(1.1); }
+.distort-58 { transform: perspective(640px) rotateX(90deg) rotateY(-180deg) rotateZ(180deg) scale(0.85); }
+.distort-59 { transform: perspective(840px) rotateX(-180deg) rotateY(270deg) rotateZ(90deg) scale(1.25); }
+.distort-60 { transform: perspective(800px) rotateX(360deg) rotateY(360deg) rotateZ(360deg) scale(1); }
+
+
+.boss-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #1f2937;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 500px;
+  z-index: 9999;
+  transform: translateX(350px);
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+.boss-message.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+.boss-text {
+  color: #e5e7eb;
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0;
+}
+.boss-close:hover {
+  color: #f3f4f6;
+  }
