@@ -1,0 +1,43 @@
+name: Shakesnake
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+
+    - name: Install Cordova
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gradle
+        npm install -g cordova
+
+    - name: Create Cordova project
+      run: |
+        cordova create app com.example.webgame WebGame
+        cd app
+        cordova platform add android
+        rm -rf www/*
+        cp -r ../www/* www/
+
+    - name: Build AAB
+      run: |
+        cd app
+        cordova build android --release -- --packageType=bundle
+
+    - name: Upload AAB
+      uses: actions/upload-artifact@v3
+      with:
+        name: WebGame.aab
+        path: app/platforms/android/app/build/outputs/bundle/release/app-release.aab
