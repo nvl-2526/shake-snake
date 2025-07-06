@@ -1,4 +1,4 @@
-name: Shakesnake
+name: Build AAB
 
 on:
   push:
@@ -17,11 +17,18 @@ jobs:
       with:
         java-version: '17'
 
-    - name: Install Cordova
+    - name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y gradle
         npm install -g cordova
+
+    - name: Accept Android licenses
+      run: |
+        yes | sudo sdkmanager --licenses || true
+
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v2
 
     - name: Create Cordova project
       run: |
